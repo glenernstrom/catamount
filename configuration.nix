@@ -102,52 +102,56 @@
   # $ nix search wget
   environment.systemPackages = with pkgs; 
 
-    let 
-      R-with-my-packages = rWrapper.override {
-        packages = with rPackages; 
-          [ ggplot2
-            ggraph
-            dplyr
-            tidyr
-            survival
-            tidyverse
-            shiny
-            knitr
-            car
-            DHARMa
-            emmeans
-            NHANES
-            faraway
-            DescTools
-            performance
-            ];
-         };
+#    let 
+#      R-with-my-packages = rWrapper.override {
+#        packages = with rPackages; 
+#          [ ggplot2
+#            ggraph
+#            dplyr
+#            tidyr
+#            survival
+#            tidyverse
+#            shiny
+#            knitr
+#            car
+#            DHARMa
+#            emmeans
+#            NHANES
+#            faraway
+#            DescTools
+#            performance
+#            ];
+#         };
 
-      RStudio-with-my-packages = rstudioWrapper.override {
-        packages = with rPackages;
-        [ ggplot2
-          ggraph
-          dplyr
-          tidyr 
-          survival
-          tidyverse
-          shiny
-          knitr
-          car
-          DHARMa
-          emmeans
-          faraway
-          DescTools
-          NHANES
-          performance
-          ]; 
-        };
-    in
+#     RStudio-with-my-packages = rstudioWrapper.override {
+#        packages = with rPackages;
+#        [ ggplot2
+#          ggraph
+#          dplyr
+#          tidyr 
+#          survival
+#          tidyverse
+#          shiny
+#          knitr
+#          car
+#          DHARMa
+#          emmeans
+#          faraway
+#          DescTools
+#          NHANES
+#          performance
+#          ]; 
+#        };
+#    in
 
   [
    
-  RStudio-with-my-packages
-  R-with-my-packages
+ # RStudio-with-my-packages
+ # R-with-my-packages
+
+   # tui
+   zellij 
+   git
 
    # graphics
    gimp
@@ -166,7 +170,10 @@
    obs-studio
    mpv
 
-   # Accessories
+   # containers
+   distrobox
+
+   # accessories
    kdePackages.skanpage
 
    # office
@@ -176,18 +183,30 @@
    pymol
    labplot
 
-   # Utilities
+   # utilities
    pcloud
    kdePackages.kcalc
    karp
    kdePackages.francis
    git
+   bitwarden-desktop
 
    # writing
    texliveFull
    kile
    kdePackages.ghostwriter
-   marksman
+   joplin-desktop
+   jabref
+
+   # internet
+   element-desktop
+   mumble
+   microsoft-edge
+   google-chrome
+   pcloud
+   discord
+   slack
+
   ];
 
 
@@ -203,6 +222,8 @@
 
   # Enable the OpenSSH daemon.
   # services.openssh.enable = true;
+
+  # Add specific fonts
   fonts.packages = with pkgs; [
    noto-fonts
    noto-fonts-cjk-sans
@@ -218,7 +239,7 @@
   ];
 
 
-  # Open ports in the firewall.
+  # Open ports in the firewall. 64734 is for mumble
    networking.firewall.allowedTCPPorts = [ 64734 ];
    networking.firewall.allowedUDPPorts = [ 64734 ];
   # Or disable the firewall altogether.
